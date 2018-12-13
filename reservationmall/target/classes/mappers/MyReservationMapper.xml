@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.myreservation">
+	
+	<!-- 예약 번호로 예약 내역 찾기 -->
+	<select id="searchResById" parameterType="String" resultType="ReservationInfo">
+		SELECT res.reservation_id, 
+		       TO_CHAR(Res.reservation_start_day, 'YYYY/MM/DD') reservation_start_day, 
+		       TO_CHAR(Res.reservation_end_day, 'YYYY/MM/DD') reservation_end_day, 
+		       Res.reservation_status, 
+		       ro.room_name, 
+		       Ro.room_standard_person_number, 
+		       Ro.room_child_max_number, 
+		       Ho.hotel_id, 
+		       Ho.hotel_name, 
+		       Ho.hotel_address, 
+		       TO_CHAR(pa.payment_day, 'YYYY/MM/DD HH24:MI DAY') payment_day, 
+		       Pa.total_price, 
+		       Pa.payment_type,
+		       TO_CHAR(pa.payment_cancellation_day, 'YYYY/MM/DD HH24:MI DAY') payment_cancellation_day,
+		       TRUNC((sysdate- res.reservation_start_day),2)start_day_check,
+       		   TRUNC((sysdate- res.reservation_end_day),2)end_day_check 
+		FROM   reservations res 
+		       join rooms ro 
+		         ON ro.room_id = res.room_id 
+		       join hotels ho 
+		         ON ho.hotel_id = ro.hotel_id 
+		       join payments pa 
+		         ON Pa.payment_id = Res.payment_id 
+		WHERE  Res.reservation_id = #{value}
+		order by Pa.Payment_Day desc
+	</select>
+	
+	<!-- 사용자 아이디로 예약 내역 리스트 찾기 -->
+	<select id="listAllReservations" parameterType="String" resultType="ReservationInfo">
+		SELECT res.reservation_id, 
+		       TO_CHAR(Res.reservation_start_day, 'YYYY/MM/DD') reservation_start_day, 
+		       TO_CHAR(Res.reservation_end_day, 'YYYY/MM/DD') reservation_end_day, 
+		       Res.reservation_status, 
+		       ro.room_name, 
+		       Ro.room_standard_person_number, 
+		       Ro.room_child_max_number, 
+		       Ho.hotel_id, 
+		       Ho.hotel_name, 
+		       Ho.hotel_address, 
+		       TO_CHAR(pa.payment_day, 'YYYY/MM/DD HH24:MI DAY') payment_day, 
+		       Pa.total_price, 
+		       Pa.payment_type,
+		       TO_CHAR(pa.payment_cancellation_day, 'YYYY/MM/DD HH24:MI DAY') payment_cancellation_day,
+		       TRUNC((sysdate- res.reservation_start_day),2)start_day_check,
+       		   TRUNC((sysdate- res.reservation_end_day),2)end_day_check 
+		FROM   reservations res 
+		       join rooms ro 
+		         ON ro.room_id = res.room_id 
+		       join hotels ho 
+		         ON ho.hotel_id = ro.hotel_id 
+		       join payments pa 
+		         ON Pa.payment_id = Res.payment_id 
+		WHERE  Res.user_id = #{value}
+		order by Pa.Payment_Day desc
+	</select>
+	
+	
+	<!-- 예약 취소하기 -->
+	<update id="cancellationRes" parameterType="int">
+		UPDATE reservations 
+		SET reservation_status = 400 
+		WHERE  reservation_id = #{value}
+	</update>
+	
+</mapper>

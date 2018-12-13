@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="../../js/ajax.js"></script>
+
+<script>
+window.onload = function(){
+  document.getElementById("button").onclick = function(){
+    var buttonLabel = this.firstChild.nodeValue;
+    var view = document.getElementById("view");
+    
+    if(buttonLabel == "숨기기"){
+      view.style.display = "none";
+      this.firstChild.nodeValue = "목록 수신";
+    }else{
+      view.style.display = "block";
+      this.firstChild.nodeValue = "숨기기";
+      ajax({
+        url: "jsonBookList.jsp",
+        callback : function(request){
+          var jsonString = request.responseText;
+          //alert(jsonString);
+          // 서버로부터 수신한 JSONString을 테이블로 출력
+			setTable(jsonString);
+        }
+      });
+      
+    }
+  }
+  
+  function setTable(jsonString){
+	  
+	var view= document.getElementById('view');
+	var res= '<table border="1">';
+	res += '<tr>'+
+		   '<th> 장르 </th>'+
+		   '<th> 제목 </th>'+
+		   '<th> 작가 </th>'+
+		   '<th> 출판사 </th>'+
+		   '<th> 가격 </th>'+
+		   '</tr>';
+	
+	var books= JSON.parse(jsonString);
+	console.log(books);
+	var page= books.page;
+	var list= books.list;
+	console.log(page);
+	console.log(list);
+	
+	for(var i=0 ; i<list.length; i++){
+		res += '<tr>';
+		res += '<td>'+list[i].kind+'</td>';
+		res += '<td>'+list[i].title+'</td>';
+		res += '<td>'+list[i].author+'</td>';
+		res += '<td>'+list[i].publisher+'</td>';
+		res += '<td>'+list[i].price+'</td>';
+		res += '</tr>';	
+	}
+	res += '</table>';
+		
+	view.innerHTML=res;			
+  }
+}
+</script>
+
+</head>
+
+<body>
+<h2>서버에서 JSON 데이터 수신 및 출력</h2>
+<button id="button">목록 수신</button>
+<div id="view">
+</div>
+</body>
+</html>

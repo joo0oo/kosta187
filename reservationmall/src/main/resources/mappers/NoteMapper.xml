@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.note">
+	
+	<!-- 전체게시물 조회 -->
+	<select id="listAll_hr" resultType="Notes" >
+	SELECT 		note_id  		AS "note_id", 
+       			user_id			AS "user_id", 
+       			note_question	AS "note_question", 
+       			note_answer		AS "note_answer", 
+       			TO_CHAR(note_date, 'YYYY/MM/DD')	AS "note_date",
+       			note_email		AS "note_email",
+       			note_checked 	AS "note_checked"
+	FROM   		notes
+	
+	</select>
+	
+	<!-- 등록하기 -->
+	<insert id="create_hr"  parameterType="Notes">
+	INSERT INTO notes 
+           	 	(note_id, 
+             	user_id, 
+             	note_question, 
+             	note_email, 
+             	note_date) 
+	VALUES     (note_id_seq.nextval, 
+            	#{user_id}, 
+            	#{note_question}, 
+            	#{note_email}, 
+            	TO_CHAR(SYSDATE,'YYYY/MM/DD'))
+	</insert>
+</mapper>

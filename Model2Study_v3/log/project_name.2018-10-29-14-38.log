@@ -1,0 +1,5 @@
+2018-10-29 14:38:46 [DEBUG] [or.kosta.shippingmall.log4j.SomeService:12] debug 로그메시지 
+2018-10-29 14:38:46 [INFO ] [or.kosta.shippingmall.log4j.SomeService:13] info 로그메시지 
+2018-10-29 14:38:46 [WARN ] [or.kosta.shippingmall.log4j.SomeService:14] warn 로그메시지 
+2018-10-29 14:38:46 [ERROR] [or.kosta.shippingmall.log4j.SomeService:15] error 로그메시지 
+2018-10-29 14:38:46 [FATAL] [or.kosta.shippingmall.log4j.SomeService:16] fatal 로그메시지 

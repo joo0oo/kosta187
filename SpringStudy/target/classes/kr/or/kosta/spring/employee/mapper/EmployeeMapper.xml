@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스 설정 : mapper 인터페이스 패키지+인터페이스 이름과 동일해야 함 -->
+<mapper namespace="kr.or.kosta.spring.employee.mapper.EmployeeMapper">
+	
+	<select id="getTime" resultType="string">
+		SELECT sysdate
+		FROM dual	
+	</select>
+
+</mapper>

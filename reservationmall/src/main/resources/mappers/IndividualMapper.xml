@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.individual">
+	
+	<!-- 회원 등록 -->
+	<insert id="createUser" parameterType="User">
+		INSERT INTO users 
+		            (user_id, 
+		             user_pw, 
+		             user_name, 
+		             user_age, 
+		             user_address, 
+		             user_phonenum, 
+		             user_email, 
+		             user_rate) 
+		VALUES     (#{user_id}, 
+		            #{user_pw}, 
+		            #{user_name}, 
+		            #{user_age}, 
+		            #{user_address}, 
+		            #{user_phonenum}, 
+		            #{user_email}, 
+		            4)
+	</insert>
+	
+	<!-- 회원 정보 수정(set, if 태그를 이용한 동적 SQL) -->
+	<update id="updateUser" parameterType="User">
+		UPDATE users 
+		<set>
+			<if test="user_pw != null">user_pw = #{user_pw}, </if>
+			<if test="user_name != null">user_name = #{user_name}, </if>
+			<if test="user_age != null">user_age = #{user_age}, </if>
+			<if test="user_address !=null">user_address = #{user_address}, </if>
+			<if test="user_phonenum != null">user_phonenum = #{user_phonenum},</if>
+		    <if test="user_email != null">user_email = #{user_email} </if>
+		</set>
+		WHERE  user_id = #{user_id}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="deleteUser" parameterType="String">
+		DELETE FROM users
+		WHERE  user_id = #{value}
+	</delete>
+	
+	<!-- 탈퇴 회원으로 업데이트 -->
+	<update id="setWithdrawal" parameterType="String">
+		UPDATE users 
+		SET    user_rate = -9 
+		WHERE  user_id = #{value}
+	</update>
+	
+	<!-- 아이디로 회원 찾기 -->
+	<select id="searchById" parameterType="String" resultType="User">
+		SELECT user_id "user_id", 
+		       user_pw "user_pw", 
+		       user_name "user_name", 
+		       user_age "user_age", 
+		       user_address "user_address", 
+		       user_phonenum "user_phonenum", 
+		       user_email "user_email", 
+		       user_rate "user_rate",
+		       TO_CHAR(user_regdate) "user_regdate"
+		FROM users
+		WHERE user_id=#{value}
+	</select>
+	
+	<!-- 이메일로 회원 찾기 -->
+	<select id="searchByEmail" parameterType="String" resultType="User">
+		SELECT user_id "user_id", 
+		       user_pw "user_pw", 
+		       user_name "user_name", 
+		       user_age "user_age", 
+		       user_address "user_address", 
+		       user_phonenum "user_phonenum", 
+		       user_email "user_email", 
+		       user_rate "user_rate",
+		       TO_CHAR(user_regdate) "user_regdate"
+		FROM users
+		WHERE user_email=#{value}
+	</select>
+	
+</mapper>

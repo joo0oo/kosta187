@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<!-- DataSource 설정 -->
+	<bean type="component" name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521"/>
+		<property name="username" value="hr"/>
+		<property name="password" value="hr"/>
+		<property name="initialSize" value="2"/>
+		<property name="maxTotal" value="10"/>
+		<property name="maxIdle" value="5"/>
+	</bean>
+	
+	<!-- Mybatis SqlSessionFactory 설정-->
+	<bean type="component" name="sqlSessionFactory" class="kr.or.kosta.reservationmall.common.factory.SqlSessionFactoryCreator">
+		<property name="configLocation" value="mybatis-config.xml"/>
+		<property name="environment" value="development"/>
+	</bean>
+
+	
+	<!-- 프로젝트 시작 -->
+	<!-- 기본규칙 : 본인 기능 + 본인 controller부분 시작점 표시-->
+	<!-- 범위를 벗어나 프로젝트에 피해를 주지 마세용~힘들어유 -->
+	<!-- ex) 허재혁 시작-->
+	<!-- 내용들~~~-->
+	<!-- ex) 허재혁 끝-->
+	
+			<!-- 송주현 시작 -->
+	<bean type="dao" name="userDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisUserDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="userService" class="kr.or.kosta.reservationmall.individual.service.UserServiceImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	
+	<!-- 1108 추가 -->
+	<bean type="dao" name="reservationDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisReservationDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean type="service" name="reservationService" class="kr.or.kosta.reservationmall.individual.service.ReservationServiceImpl">
+		<property name="reservationDao" ref="reservationDao"/>
+	</bean>
+	<!-- 1109 추가 -->
+	<bean type="dao" name="reviewDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisReviewDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean type="service" name="reviewService" class="kr.or.kosta.reservationmall.individual.service.ReviewServiceImpl">
+		<property name="reviewDao" ref="reviewDao"/>
+	</bean>
+	<!-- 1113 변경 -->
+	<bean type="dao" name="myWishlistDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisMyWishlistDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean type="service" name="myWishlistService" class="kr.or.kosta.reservationmall.individual.service.MyWishlistServiceImpl">
+		<property name="myWishlistDao" ref="myWishlistDao"/>
+	</bean>
+	<!-- 1113 추가 -->
+	<bean type="dao" name="lastviewDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisLastviewDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean type="service" name="lastviewService" class="kr.or.kosta.reservationmall.individual.service.LastviewServiceImpl">
+		<property name="lastviewDao" ref="lastviewDao"/>
+	</bean>
+	<!-- 송주현 끝 -->
+	
+	<!-- 정지원 시작 -->
+	<bean type="dao" name="hotelDao" class="kr.or.kosta.reservationmall.hotel.dao.MybatisHotelDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
+	<!-- 1113 변경 -->
+	<bean type="service" name="hotelService" class="kr.or.kosta.reservationmall.hotel.service.HotelServiceImpl">
+		<property name="hotelDao" ref="hotelDao"/>
+		<property name="reviewDao" ref="reviewDao"/>
+	</bean>
+	
+	<!-- 정지원 끝 -->
+	
+	<!-- 이혜림 시작 -->
+	<bean type="dao" name="ArticleDao" class="kr.or.kosta.reservationmall.board.dao.MybatisArticleDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="ArticleService" class="kr.or.kosta.reservationmall.board.service.ArticleServiceImpl">
+		<property name="ArticleDao" ref="ArticleDao"/>
+	</bean>
+	
+	<bean type="dao" name="BoardDao" class="kr.or.kosta.reservationmall.board.dao.MybatisBoardDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="BoardService" class="kr.or.kosta.reservationmall.board.service.BoardServiceImpl">
+		<property name="BoardDao" ref="BoardDao"/>
+	</bean>
+	
+	<bean type="dao" name="NoteDao" class="kr.or.kosta.reservationmall.note.dao.MybatisNoteDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="NoteService" class="kr.or.kosta.reservationmall.note.service.NoteServiceImpl">
+		<property name="NoteDao" ref="NoteDao"/>
+	</bean>
+	
+	<!-- 이혜림 끝 -->
+	<!-- 허재혁 시작 -->
+	<bean type="dao" name="loginDao" class="kr.or.kosta.reservationmall.login.dao.MybatisLoginDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="loginService" class="kr.or.kosta.reservationmall.login.service.LoginServiceImpl">
+		<property name="loginDao" ref="loginDao"/>
+	</bean>
+	
+	
+	<bean type="dao" name="adminDao" class="kr.or.kosta.reservationmall.admin.dao.MybatisAdminDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="adminService" class="kr.or.kosta.reservationmall.admin.service.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"/>
+	</bean>
+	
+	<bean type="dao" name="addWishlistDao" class="kr.or.kosta.reservationmall.individual.dao.MybatisAddWishlistDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="addWishlistService" class="kr.or.kosta.reservationmall.individual.service.AddWishlistServiceImpl">
+		<property name="addWishlistDao" ref="addWishlistDao"/>
+	</bean>
+	<!-- 허재혁 2018-11-12 추가 -->
+	<bean type="dao" name="hotelStatisDao" class="kr.or.kosta.reservationmall.hotel.dao.MybatisHotelStatisDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="hotelStatisService" class="kr.or.kosta.reservationmall.hotel.service.HotelStatisServiceImpl">
+		<property name="hotelStatisDao" ref="hotelStatisDao"/>
+	</bean>
+	
+	<!-- 허재혁 2018-11-12 추가 -->
+	
+	<!-- 허재혁 2018-11-13 추가 -->
+	<bean type="dao" name="hotelPaymentDao" class="kr.or.kosta.reservationmall.hotel.dao.MybatisHotelPaymentDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<bean type="service" name="hotelPaymentService" class="kr.or.kosta.reservationmall.hotel.service.HotelPaymentServiceImpl">
+		<property name="hotelPaymentDao" ref="hotelPaymentDao"/>
+	</bean>
+	
+	<!-- 허재혁 2018-11-13 추가 -->
+	
+	<!-- 허재혁 끝 -->
+	
+	
+</beans>

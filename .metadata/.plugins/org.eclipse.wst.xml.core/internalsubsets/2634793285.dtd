@@ -1,0 +1,5 @@
+
+  <!-- 엘리먼트, 속성, 엔티티 등 선언 -->
+  <!ELEMENT booklist (book+)>
+  <!ELEMENT book (#PCDATA)>
+  <!ENTITY company  "KOSTA 출판사">

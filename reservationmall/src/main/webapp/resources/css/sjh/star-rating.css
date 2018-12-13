@@ -1,0 +1,9 @@
+.checked-star {
+	font-size: 15pt;
+    color: orange;
+}
+
+.unchecked-star{
+	font-size: 15pt;
+	color: gray;
+}

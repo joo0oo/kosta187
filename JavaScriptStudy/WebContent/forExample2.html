@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+<link rel="stylesheet" type="text/css" href="css/table.css">
+</head>
+
+
+<body>
+
+<h2> forin 문 </h2>
+
+<script type="text/javascript">
+  var array= []; //배열 묵시적 생성
+  var array2= [1, 2, 3, 4, 5]; //묵시적 생성 및 초기화 
+  
+  console.log(array2.length);
+  for ( var i in array2) {
+  	console.log(i +" : "+array2[i]);
+  }
+  
+  for ( var key in document) {
+  	console.log(key +" : "+document[key]);
+  }
+</script>
+
+
+</body>
+</html>

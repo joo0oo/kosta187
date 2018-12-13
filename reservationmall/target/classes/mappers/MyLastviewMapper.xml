@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.mylastview">
+	
+	<!-- 회원 아이디로 최근조회 3가지 리턴 -->
+	<select id="getMyLastview" parameterType="String" resultType="LastviewSJH">
+		SELECT lastview_id, 
+		       hotel_id, 
+		       user_id, 
+		       To_char(lastview_date, 'YYYY/MM/DD')  lastview_date
+		FROM   (SELECT * 
+		        FROM   lastviews 
+		        WHERE  user_id = #{value} 
+		        ORDER  BY lastview_date DESC) 
+		WHERE  ROWNUM <![CDATA[ <= ]]> 3
+	</select>
+	
+</mapper>

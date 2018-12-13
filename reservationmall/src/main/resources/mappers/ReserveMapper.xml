@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.reserve">
+	<select id="checkHotelReserve" parameterType="HotelReserveCheck" resultType="int" >
+	SELECT		 room_id
+	FROM		 rooms
+	WHERE		 room_name=#{room_name} and hotel_id = #{hotel_id} and room_id not in(select room_id from reservations where room_id in (select room_id from rooms where hotel_id = #{hotel_id} and room_name = #{room_name}) and reservation_start_day between #{reservation_start_day} and #{reservation_end_day} and reservation_end_day  between #{reservation_start_day} and #{reservation_end_day})
+	</select>
+	
+	<select id="getPaymentId" parameterType="string" resultType="int" >
+	SELECT 		max(payment_id)
+	FROM 		payments
+	WHERE 		payment_type=#{type_value}
+	</select>
+	
+	<insert id="addHotelPayment"  parameterType="HotelPayment">
+	INSERT INTO		 payments
+	VALUES			(payment_id_seq.nextval,#{total_price},sysdate,#{type_value},null)
+	</insert>
+	
+	<insert id="addHotelReserve"  parameterType="HotelReserve">
+	INSERT INTO 	reservations
+	VALUES			(reservation_id_seq.nextval,#{reservation_start_day},
+					#{reservation_end_day},#{user_id},
+					#{payment_id},
+					(select min(room_id) from rooms where room_name=#{room_name} and hotel_id = #{hotel_id} and room_id not in(select room_id from reservations where room_id in (select room_id from rooms where hotel_id = #{hotel_id} and room_name = #{room_name}) and reservation_start_day between #{reservation_start_day} and #{reservation_end_day} and reservation_end_day  between #{reservation_start_day} and #{reservation_end_day})) 
+					,200)
+	
+	</insert>
+	
+
+</mapper>

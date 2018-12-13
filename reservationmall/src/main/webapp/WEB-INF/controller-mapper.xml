@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<!-- 프로젝트 시작 -->
+	<!-- 기본규칙 : 본인 기능 + 본인 controller부분 시작점 표시-->
+	<!-- 범위를 벗어나 프로젝트에 피해를 주지 마세용~힘들어유 -->
+	<!-- ex) 허재혁 시작-->
+	<!-- 내용들~~~-->
+	<!-- ex) 허재혁 끝-->
+	
+	<!-- 송주현 시작 -->
+	<bean type="controller" name="/login/regist_form" class="kr.or.kosta.reservationmall.login.controller.RegistController" />
+	<bean type="controller" name="/individual/regist" class="kr.or.kosta.reservationmall.individual.controller.RegistController" />
+	<bean type="controller" name="/individual/validation" class="kr.or.kosta.reservationmall.individual.controller.RegistValidationController" />
+	
+	<bean type="controller" name="/regist/regist" class="kr.or.kosta.reservationmall.regist.controller.RegistController" />
+	<bean type="controller" name="/regist/validation" class="kr.or.kosta.reservationmall.regist.controller.RegistValidationController" />
+	
+	<bean type="controller" name="/individual/mypage" class="kr.or.kosta.reservationmall.individual.controller.MypageController" />
+	<bean type="controller" name="/individual/editUser" class="kr.or.kosta.reservationmall.individual.controller.EditUserInfoController" />
+	<bean type="controller" name="/individual/withdrawal" class="kr.or.kosta.reservationmall.individual.controller.WithdrawalController" />
+	
+	<bean type="controller" name="/individual/reservationList" class="kr.or.kosta.reservationmall.individual.controller.ReservationListController" />
+	<bean type="controller" name="/individual/cancellationRes" class="kr.or.kosta.reservationmall.individual.controller.CancellationResController" />
+	<bean type="controller" name="/individual/writeReview" class="kr.or.kosta.reservationmall.individual.controller.WriteReviewController" />
+	<bean type="controller" name="/individual/readReview" class="kr.or.kosta.reservationmall.individual.controller.ReadReviewController" />
+	
+	<bean type="controller" name="/individual/deleteWishlist" class="kr.or.kosta.reservationmall.individual.controller.DeleteWishlistController" />
+	<!-- 송주현 끝 -->
+	
+	
+	<!-- 정지원 시작 -->
+	<bean type="controller" name="/hotel/searchhotel" class="kr.or.kosta.reservationmall.hotel.controller.SearchHotelController" />
+	<bean type="controller" name="/hotel/review" class="kr.or.kosta.reservationmall.review.controller.ReviewController" />
+	<!-- 정지원 끝 -->
+	
+		<!-- 이혜림 시작 -->
+	<bean type="controller" name="/article/controller" class="kr.or.kosta.reservationmall.board.controller.ArticleController" />
+	<bean type="controller" name="/board/controller" class="kr.or.kosta.reservationmall.board.controller.BoardController" />
+	<bean type="controller" name="/note/controller" class="kr.or.kosta.reservationmall.note.controller.NoteController" />
+	
+	<!-- 이혜림 끝 -->
+	
+	
+	<!-- 허재혁 시작 -->
+	<bean type="controller" name="/login/controller" class="kr.or.kosta.reservationmall.login.controller.LoginController" />
+	<bean type="controller" name="/admin/main_board" class="kr.or.kosta.reservationmall.admin.controller.AdminController" />
+	<bean type="controller" name="/wishlist" class="kr.or.kosta.reservationmall.individual.controller.AddWishlistController" />
+	<bean type="controller" name="/hotelPaymentCheck" class="kr.or.kosta.reservationmall.hotel.controller.PaymentHotelController" />
+	<bean type="controller" name="/paymentResult/success" class="kr.or.kosta.reservationmall.hotel.controller.PaymentResultController" />
+	<bean type="controller" name="/paymentResult/fail" class="kr.or.kosta.reservationmall.hotel.controller.PaymentResultFailController" />
+	<!-- 허재혁 끝 -->
+	
+	
+</beans>

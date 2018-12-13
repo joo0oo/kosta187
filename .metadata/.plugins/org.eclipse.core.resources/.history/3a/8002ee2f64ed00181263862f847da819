@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.kosta.spring.board.mapper.BoardMapper">
+
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	
+	<select id="getList" resultType="kr.or.kosta.spring.board.domain.BoardVO">
+		SELECT bno, 
+		       title, 
+		       content, 
+		       writer,
+		       TO_CHAR(regdate, 'YYYY/MM/DD') regdate,
+		       TO_CHAR(updatedate, 'YYYY/MM/DD') updatedate
+		FROM   tbl_board 
+		WHERE  bno <![CDATA[ > ]]> 0	
+	</select>
+	
+	<select id="getListWithPaging" resultType="kr.or.kosta.spring.board.domain.BoardVO">
+		<![CDATA[ 
+		SELECT bno, 
+		       title, 
+		       content, 
+		       writer, 
+		       regdate, 
+		       updatedate 
+		FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */ 
+		              ROWNUM rn, 
+		              bno, 
+		              title, 
+		              content, 
+		              writer, 
+		              To_char(regdate, 'YYYY/MM/DD') regdate, 
+		              To_char(updatedate, 'YYYY/MM/DD') updatedate 
+		        FROM   tbl_board 
+		        WHERE  
+		         ]]>
+		         
+		    <include refid="criteria"></include>
+		        
+		        <![CDATA[ ROWNUM <= #{pageNum} * #{amount} ]]> ) 
+		WHERE   <![CDATA[ rn > (#{pageNum}-1)*#{amount} ]]> 
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbl_board 
+		            (bno, 
+		             title, 
+		             content, 
+		             writer) 
+		VALUES     (seq_board.NEXTVAL, 
+		            #{title}, 
+		            #{content}, 
+		            #{writer})
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+			select seq_board.nextval from dual
+		</selectKey>
+		
+		INSERT INTO tbl_board 
+		            (bno, 
+		             title, 
+		             content, 
+		             writer) 
+		VALUES     (#{bno}, 
+		            #{title}, 
+		            #{content}, 
+		            #{writer})
+	</insert>
+	
+	<select id="read" resultType="kr.or.kosta.spring.board.domain.BoardVO">
+		SELECT bno, 
+		       title, 
+		       content, 
+		       writer, 
+		       TO_CHAR(regdate, 'YYYY/MM/DD') regdate,
+		       TO_CHAR(updatedate, 'YYYY/MM/DD') updatedate
+		FROM   tbl_board 
+		WHERE  bno = #{bno}
+	</select>
+	
+	<delete id="delete">
+		DELETE tbl_board
+		WHERE  bno = #{bno}
+	</delete>
+	
+	<update id="update">
+		UPDATE tbl_board 
+		SET    title = #{title}, 
+		       content = #{content}, 
+		       writer = #{writer}, 
+		       updatedate = SYSDATE 
+		WHERE  bno = #{bno}
+	</update>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT count(bno) 
+		FROM   tbl_board 
+		WHERE  bno <![CDATA[ > ]]> 0	
+	</select>
+	
+	<update id="updateReplyCnt">
+		UPDATE tbl_board
+		SET replycnt= replycnt+ #{amount}
+		WHERE bno= #{bno}
+	</update>
+	
+</mapper>

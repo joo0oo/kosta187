@@ -1,0 +1,70 @@
+package kr.or.kosta.spring.board.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.kosta.spring.board.domain.Criteria;
+import kr.or.kosta.spring.board.domain.ReplyPageDTO;
+import kr.or.kosta.spring.board.domain.ReplyVO;
+import kr.or.kosta.spring.board.mapper.BoardMapper;
+import kr.or.kosta.spring.board.mapper.ReplyMapper;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
+
+@Log4j
+@Service
+@AllArgsConstructor
+public class ReplyServiceImpl implements ReplyService {
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReplyMapper mapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardMapper boardMapper;
+	
+	@Transactional //tbl_board 와 tbl_reply 의 트랜잭션 처리
+	@Override
+	public int register(ReplyVO reply) { //댓글 등록
+		log.info("register..."+reply);
+		boardMapper.updateReplyCnt(reply.getBno(), 1); //해당 게시글의 총 댓글수 1 증가
+		return mapper.insert(reply);
+	}
+
+	@Override
+	public ReplyVO get(Long rno) {
+		log.info("get..."+rno);
+		return mapper.read(rno);
+	}
+
+	@Override
+	public int modify(ReplyVO reply) {
+		log.info("modify..."+reply);
+		return mapper.update(reply);
+	}
+
+	@Transactional
+	@Override
+	public int remove(Long rno) { //댓글 삭제
+		log.info("remove..."+rno);
+		ReplyVO reply= mapper.read(rno);
+		boardMapper.updateReplyCnt(reply.getBno(), -1);
+		return mapper.delete(rno);
+	}
+
+	@Override
+	public List<ReplyVO> getList(Criteria cri, Long bno) {
+		log.info("get Reply List of a Board..."+bno);
+		return mapper.getListWithPaging(cri, bno);
+	}
+
+	@Override
+	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
+		//해당 bno 게시글의 전체 댓글 수 && 이 게시글의 페이지에 따른 댓글 목록 리턴
+		return new ReplyPageDTO(mapper.getCountByBno(bno),mapper.getListWithPaging(cri, bno));
+	}
+
+}

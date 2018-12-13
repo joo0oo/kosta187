@@ -1,0 +1,90 @@
+/**
+ * 1차원 배열 선언, 생성, 초기화 
+ * @author 송주현
+ *
+ */
+public class ArrayExample {
+
+	public static void main(String[] args) {
+		int[] array; //변수 선언 (생성은x)
+		//int[5] array; // Java에서는 에러(배열을 객체로 보기 때문) (C에서는 가능)
+		array=new int[10];
+		array[0]= 10;
+		array[9]=100;
+		System.out.println(array[0]);
+		System.out.println(array[9]);
+		
+		for(int i=0; i<10; i++) {
+			System.out.print(array[i]+"\t");
+			
+		}
+		
+		System.out.println(array.length); //array의 크기를 자동 계산 : 반복문 돌때 .length() 사용하기
+		
+		
+		int[] array2= new int[] {1,2,3,4,5}; 
+		int[] array30= {11,22,33,44,55}; //둘다 가능
+		
+		//배열 반복하는 for문
+		for (int i = 0; i < array30.length; i++) {
+			System.out.println(array30[i]);
+		}
+		
+		//확장 for문 - 배열 반복하는 for문 간편식 (배열의 0부터 끝까지 반복) java 5버전에서 추가된 문법
+		for( int value : array2 ) { //자동으로 array2의 0부터 끝까지 돌면서 그 각각의 값을 value 변수에 넣음
+			System.out.println(value); //array[i] 출력과 같은뜻
+		} //간단하지만 index 접근은 불가능
+		//ctrl+스페이스바 foreach 선택해도 가능
+		
+		
+		
+		/*미션1 : 배열 복사
+			크기 5의 배열로 크기 7의 배열 만들기 (나머지 두개는 비워져있는 상태로)
+		int[] array3= {3,1,9,2,5};
+		int[] array4= ????		
+		*/
+	
+		int[] array3= {3,1,9,2,5};
+		//int[] array4= new int[7];
+		int[] array4= new int[array3.length+2]; //array3보다 크기가 2 큰 배열 만들기
+		for(int i=0; i<5; i++) {
+			array4[i]=array3[i];
+		}
+		
+		for(int val:array4) {
+			System.out.print(val+"\t");
+		}
+		
+		System.out.println();
+		
+		
+		/*
+		 미션2 : 정렬
+		 int[] lottos = {34, 12, 7, 3, 9, 25, 2};
+		 배열을 새로 만들지 말고 이 배열 안에서 오름차순 정렬 하기
+		 for(int i: lottos){
+			System.out.print(i+"\t");
+			????? //여기에 코드 입력 (버블소트)
+		 }		 
+		 */
+		
+		int[] lottos= {34, 12, 7, 3, 9, 25, 2};
+		int tmp;
+		for(int j=0; j<lottos.length; j++) {
+			for(int i=0; i<lottos.length-j-1; i++) {
+				if(lottos[i]>lottos[i+1]) {
+					tmp=lottos[i];
+					lottos[i]=lottos[i+1];
+					lottos[i+1]=tmp;
+				}
+			}
+		}
+		
+		for (int i : lottos) {
+			System.out.print(i+"\t");
+		}
+		
+	
+	}
+
+}

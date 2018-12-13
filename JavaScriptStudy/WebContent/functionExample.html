@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> 자바스크립트 함수 </title>
+
+<script type="text/javascript">
+sum(1,2,3); //실행가능 : 선언형 함수는 이미 등록된 상태이므로 선언부 앞에서 호출해도 된다
+// show(); //에러 : 익명 함수는 등록되지 않은 상태이므로 호출불가 (절차적)
+
+// #1. 선언형 함수 정의
+function sum (x, y, z){
+  return x+ y+ z;
+}
+
+// #2. 익명 함수 정의
+var show = function(message){
+	document.write(message);
+	document.write('<br>');
+}
+
+// 익명 함수의 사용 : 콜백 함수 -> 인자로 어떤 함수 객체를 받아서 이 함수 내에서 사용
+function some(callback){
+	document.write('<br><h3>');
+	callback(); //함수도 객체이므로 이렇게 사용 가능 
+	document.write('</h3><br>');
+}
+
+function some2(){
+	return function(){ //익명함수를 리턴
+		document.write('익명함수를 리턴<br>');
+	};
+}
+
+
+// #3. 중첩 함수
+function hypotenus(a,b){
+	function square(x){
+		return x*x;
+	}
+	return Math.sqrt(square(a)+square(b));
+}
+
+// 비정형 인자 함수 정의
+function summ(){ //인자가 들어오는 여러가지 경우를 모두 처리
+	console.log(arguments); //모든 함수 내에서 arguments로 인자에 접근 가능함
+	
+	var res=0;
+	for ( var i in arguments) {
+		res += arguments[i];
+	}
+	return res;
+}
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+//#1. 선언형 함수
+var res= sum(10, 20, 30); //window 객체에 등록된 sum 메소드 호출
+document.write(res);
+document.write('<br>');
+
+var res= sum(10,20);
+document.write(res);
+document.write('<br>');
+
+//#2. 익명 함수 -> 전달하거나 리턴할때 주로 사용
+show('jAAAAAAAAAAAvAAAAAAAAAAAA');
+
+some(function(){ //some의 인자로 함수를 직접 전달
+	document.write('익명 함수 사용법');
+});
+
+some2()(); //some2() <-이건 리턴받은 함수 객체 자체이므로 이 함수 객체를 호출하려면 some2()() <-이렇게 써야함
+
+alert(hypotenus(30,20));
+
+//arguments 배열을 이용한 비정형 인자 함수 
+document.write(summ());
+document.write('<br>');
+document.write(summ(2));
+document.write('<br>');
+document.write(summ(5,10,15,20));
+document.write('<br>');
+
+console.log(summ); //summ()의 toString() 호출됨
+console.log(typeof summ); //function 객체임 
+
+(function(){
+	console.log('익명함수입니다');
+})(); //함수를 정의와 동시에 실행하기 (테스트할 때 많이 사용하는 방식)
+</script>
+
+
+
+</body>
+</html>

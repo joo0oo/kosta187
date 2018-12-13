@@ -1,0 +1,79 @@
+SELECT employee_id, 
+       last_name, 
+       salary 
+FROM   employees 
+WHERE  NOT( salary > 5000 
+            AND salary < 15000 ); 
+
+SELECT first_name, 
+       hire_date 
+FROM   employees 
+WHERE  department_id = 50 
+       AND job_id = 'ST_MAN' 
+       AND hire_date = '2004-07-18'; 
+
+SELECT * 
+FROM   employees 
+WHERE  job_id = 'ST_MAN' 
+        OR job_id = 'ST_CLERK'; 
+
+SELECT * 
+FROM   employees 
+WHERE  manager_id IS NULL; 
+
+SELECT TO_CHAR(hire_date,'YYYY'), COUNT(hire_date)
+FROM employees
+GROUP BY TO_CHAR(hire_date,'YYYY');
+
+
+SELECT * 
+FROM   employees 
+WHERE  salary < 10000 
+       AND job_id IN ( 'SH_CLERK', 'PU_MAN', 'PU_CLERK' ); 
+
+SELECT Initcap(last_name), 
+       Length(last_name) 
+FROM   employees 
+WHERE  last_name LIKE 'J%' 
+        OR last_name LIKE 'A%' 
+        OR last_name LIKE 'M%'; 
+
+SELECT Count(hire_date) 
+FROM   employees 
+GROUP  BY To_char(hire_date, 'YYYY'); 
+
+SELECT * 
+FROM   employees 
+WHERE  Mod(employee_id, 2) = 1; 
+
+SELECT To_char(Next_day(Add_months(sysdate, 6), 6), 'YYYY-MM-DD HH24:MI:SS DAY') 
+       "6°³¿ùÈÄ" 
+FROM   dual; 
+
+SELECT employee_id, 
+       first_name, 
+       NVL(TO_CHAR(manager_id),'´ë»§') manager_id
+FROM   employees; 
+
+SELECT first_name, 
+       employee_id, 
+       CASE 
+         WHEN Mod(employee_id, 3) = 0 THEN '¿µÈ­¹è¿ìÆÀ' 
+         WHEN Mod(employee_id, 3) = 1 THEN '°³±×¸ÇÆÀ' 
+         WHEN Mod(employee_id, 3) = 2 THEN '°¡¼öÆÀ' 
+         ELSE '¹ÌÁ¤' 
+       END "ÆÀÀÌ¸§" 
+FROM   employees; 
+
+--12.
+SELECT first_name||' '||last_name "name", LPAD('($'||TRIM(TO_CHAR(salary,'999,999'))||')',FLOOR(salary/1000)+LENGTH('($'||salary||')'),'*') 
+"±×·¡ÇÁ"
+from employees;
+
+--13.
+SELECT department_id, count(*)
+FROM employees
+WHERE hire_date between '02/03/01' and '03/02/28'
+GROUP BY department_id;
+--HAVING 
+

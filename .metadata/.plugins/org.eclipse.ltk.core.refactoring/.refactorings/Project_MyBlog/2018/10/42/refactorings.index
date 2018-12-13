@@ -1,0 +1,91 @@
+1539742932589	Delete element
+1539742934714	Delete element
+1539742944898	Delete element
+1539742947425	Delete element
+1539742952143	Delete element
+1539742953989	Delete element
+1539742956015	Delete element
+1539742957562	Delete element
+1539742959171	Delete element
+1539742960809	Delete element
+1539742962824	Delete element
+1539742977951	Delete element
+1539742980084	Delete element
+1539745101491	Delete element
+1539745127600	Delete element
+1539745129614	Delete element
+1539745132665	Delete element
+1539745138653	Delete element
+1539745141246	Delete element
+1539745142982	Delete element
+1539745148921	Delete elements
+1539745158772	Delete element
+1539745160803	Delete element
+1539745218727	Delete element
+1539745290385	Delete element
+1539753093631	Copy file
+1539755123993	Copy file
+1539756752913	Copy file
+1539756760768	Delete element
+1539756858184	Rename resource 'tables.html'
+1539758124557	Copy file
+1539758322181	Copy file
+1539758592674	Rename resource 'board.jsp'
+1539759099378	Copy file
+1539759986826	Copy file
+1539760136654	Copy file
+1539760235453	Delete element
+1539760237327	Delete element
+1539760239529	Delete element
+1539760242480	Delete element
+1539760246272	Delete element
+1539760252924	Delete element
+1539760290081	Rename resource 'board.jsp'
+1539760320958	Rename resource 'footage-board.jsp'
+1539760334378	Copy file
+1539760364636	Rename resource 'freeboard.jsp'
+1539760370909	Rename resource 'footageboard.jsp'
+1539760377542	Copy file
+1539760408689	Delete element
+1539760419833	Rename resource 'board-table.jsp'
+1539760432391	Copy file
+1539763129113	Move 3 resources to 'user'
+1539763166953	Move 3 resources to 'boards'
+1539765521566	Copy file
+1539824723804	Rename resource 'input-article.jsp'
+1539828122650	Copy file
+1539831463046	Delete element
+1539831472489	Copy file
+1539831553552	Delete element
+1539832793816	Copy compilation units
+1539832830765	Copy compilation units
+1539832835265	Delete element
+1539833752620	Rename resource 'regist_action.jsp'
+1539851911374	Rename resource 'regist-action.jsp'
+1539853163001	Copy file
+1539853181994	Rename resource 'logout.jsp'
+1539853560654	Rename resource 'regist-valid.jsp'
+1539854941602	Rename resource 'loginAction.jsp'
+1539856111877	Copy file
+1539856130657	Move 'logout.jsp' to 'user'
+1539860615727	Copy compilation units
+1539860835883	Rename compilation unit 'User.java'
+1539860931771	Rename type 'JdbcUserDao'
+1539860939102	Rename type 'UserDao'
+1539862561875	Copy compilation unit
+1539862575806	Rename compilation unit 'UserDaoTest.java'
+1539916148400	Delete element
+1539918422193	Copy compilation unit
+1539918432187	Rename type 'UserDao'
+1539918441349	Copy compilation unit
+1539918448875	Rename type 'JdbcFootageDao'
+1539920486273	Move 'footage-table.jsp' to 'boards'
+1539920490157	Move 'freeboard-table.jsp' to 'boards'
+1539920492646	Move 'review-table.jsp' to 'boards'
+1539927185986	Copy file
+1539932987944	Copy compilation unit
+1539932995994	Rename type 'FootageDaoTest'
+1539940865992	Rename resource 'article-view-action.jsp'
+1539948638546	Copy file
+1539952617941	Copy file
+1540024381436	Copy file

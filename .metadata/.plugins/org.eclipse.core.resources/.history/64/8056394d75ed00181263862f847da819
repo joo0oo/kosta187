@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> 파일 업로드 </title>
+</head>
+<body>
+
+
+<form action="/spring/uploadFormAction" method="post" enctype="multipart/form-data">
+
+<input type='file' name='uploadFile' multiple>
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+
+<button>Submit</button>
+
+</form>
+
+</body>
+</html>

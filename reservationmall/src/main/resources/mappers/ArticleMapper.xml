@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.board">
+
+
+	<!-- 전체게시물 조회 -->
+	<select id="listAll_hr" resultType="Article" >
+		SELECT 			article_id "id", 
+     	  				article_title "title", 
+     	  				article_content "contents", 
+    	   				user_id "userId", 
+    	   				TO_CHAR(article_date,'YYYY/MM/DD') "date", 
+   	    				article_hit_count "hitCount"
+		FROM   			articles 
+		WHERE  			board_id = 1
+		ORDER BY 		article_id asc
+		
+	</select>
+	
+	<!-- 게시물 상세 조회  -->
+	<select id="read_hr" parameterType="String" resultType="Article">
+	SELECT 				article_id "id", 
+     	  				article_title "title", 
+     	  				article_content "contents", 
+    	   				user_id "userId", 
+    	   				article_date "date", 
+   	    				article_hit_count "hitCount"
+		FROM   			articles 
+		WHERE  			board_id = 1 AND article_id = #{value}
+	</select>
+	
+	
+	<!-- 게시판 조회수 증가  -->
+	<update id="increaseHitCount_hr"  parameterType="String">
+	UPDATE articles
+	SET article_hit_count = article_hit_count + 1
+	WHERE board_id = 1 AND article_id= #{value}
+	</update>
+	
+
+</mapper>

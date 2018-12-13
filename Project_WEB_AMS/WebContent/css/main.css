@@ -1,0 +1,93 @@
+@charset "utf-8";
+#title{
+  margin: 10px auto;
+  font-size: 40pt;
+  font-weight: bold;
+  color:MidnightBlue;
+  text-align: center;
+}
+
+form {
+	width: 600px;
+	margin: 10px auto;
+	border: 1px solid black;
+	background-color: MidnightBlue;
+	margin: 10px auto;
+    padding: 10px 0 0 0;
+}
+
+form div {
+	margin: 10px 0 0 10px;
+	color: LightSteelBlue;
+	font-weight: bold;
+}
+
+form div * {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+form div.checkDiv{
+  font-weight: normal;
+  color: yellow;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+form div.checkDiv span.formName{
+  visibility: hidden;
+}
+
+form div.checkDiv span:nth-child(2){
+  font-size: 10pt;
+  color:tomato;
+  visibility: hidden;
+}
+
+.button {
+	width: 80px;
+	background-color: LightSteelBlue;
+	border: none;
+	border-radius: 10px 0 10px 0;
+	color: MidnightBlue;
+	padding: 4px 0;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px;
+	cursor: pointer;
+}
+
+.button:hover {
+  background-color: blue;
+  color: white;
+}
+
+div.buttons {
+	width: 600px;
+	margin: 10px auto;
+	background-color: LightSteelBlue;
+}
+
+div.buttons input {
+	margin: 10px auto;
+}
+
+#editMoney_form{
+	display:none;
+}
+
+#viewTable{
+  width: 800px;
+  height: 100%;
+  border: none;
+
+}
+
+div.table_iframe {
+  width: 800px;
+  height: 600px;
+  margin: 10px auto;
+}

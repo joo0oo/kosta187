@@ -1,0 +1,5 @@
+package kr.or.kosta.spring.demo.controller;
+
+public class SampleController {
+
+}

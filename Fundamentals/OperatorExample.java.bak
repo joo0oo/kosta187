@@ -1,0 +1,39 @@
+class OperatorExample {
+	public static void main(String[] args)	{
+		
+		int x=50, y=20;
+		//산술연산자
+		System.out.println(" 결과 : " + x + y); //문자열 붙이기
+		System.out.println(" 결과 : " + (x + y)); //우선순위를 지정
+		System.out.println(" 결과 : " + (x % y)); //나머지 구하기
+
+		//복합 대입연산자
+		// x = x+y;
+		x += y; 
+
+		//형변환 연산자
+		double weight = 78.34343;
+		System.out.println(weight); //소숫점 그대로 출력
+		System.out.println((int)weight); //소숫점 자르고 출력 
+
+
+		//증감연산자
+		x=100;
+		System.out.println(x++); //100출력 : 라인 실행 후 증가
+		System.out.println(++x); //102출력 : 증가 후 라인 실행
+
+		//비트 연산자
+		x = 10;
+		System.out.println(x*2*2*2);
+		x=10;
+		System.out.println(x << 3); 
+
+		//조건 삼항연산자
+		int a=1, b=2, c=3;
+		int max= (a>b)? a:b; //조건이 참이면 a, 거짓이면 b를 리턴
+		int min= (b<c)? b:c; //조건이 참이면 b, 거짓이면 c를 리턴
+		System.out.println(max);
+		System.out.println(min);
+
+	}
+}

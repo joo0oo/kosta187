@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>키워드로 장소검색하고 목록으로 표출하기</title>
+  <style>
+    .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+</style>
+</head>
+
+<body>
+  <div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+    <div id="menu_wrap" class="bg_white">
+      <div class="option">
+        <div>
+          <form onsubmit="searchPlaces(); return false;">
+            키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
+            <button type="submit">검색하기</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <ul id="placesList"></ul>
+      <div id="pagination"></div>
+    </div>
+  </div>
+  <div id="hotel">
+
+  </div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=380ae52ddded1dcd6fc9df096287f781&libraries=services"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+    var hotelName = `메리어트 이그제큐티브 아파트먼트,W워커힐,그랜드앰배서더호텔서울,그랜드인터컨티넨탈서울파르나스,그랜드하얏트서울,그랜드힐튼호텔서울,노보텔앰배서더강남,롯데시티호텔김포공항,롯데호텔,롯데호텔롯데월드,르네상스서울호텔,메이필드호텔,밀레니엄서울힐튼호텔,반얀트리클럽&스파서울,서울팔레스호텔,쉐라톤그랜드워커힐,쉐라톤서울디큐브시티호텔,신라호텔,엘루이호텔,웨스틴조선호텔서울,인터컨티넨탈서울코엑스,임피리얼팰리스호텔,콘래드서울,파크하얏트서울호텔,플라자호텔,호텔리츠칼튼서울,노보텔앰배서더독산,라마다서울호텔,라마다호텔앤스위트,렉싱턴호텔,롯데시티호텔마포,베스트웨스턴강남호텔,베스트웨스턴호텔나이아가라,서울가든호텔,세종호텔,스탠포드호텔서울,아카시아호텔,캐피탈호텔,코리아나호텔,퍼시픽호텔,프리마호텔,호텔리베라,호텔프레지던트,호텔피제이,홀리데이인성북서울호텔,경남관광호텔,노블레스관광호텔,노스탈자호텔,레이크호텔,리버파크관광호텔,메트로호텔,빅토리아호텔,사보이호텔,삼정관광호텔,서울렉스호텔,아스토리아호텔,앰버서더,여의도관광호텔,영동관광호텔,캘리포니아관광호텔,크라운관광호텔,크라운관광호텔,트리아관광호텔,팝그린관광호텔,프린스호텔,한강호텔,해밀톤호텔,호텔그린월드,뉴리젠트호텔,뉴부림호텔,바빌론호텔,브라운관광호텔,비원관광호텔,잠실관광호텔,프랜드호텔,호텔R,호텔도도,호텔에어포트,CF호텔,JJ호텔,The-K서울호텔(구 더케이서울호텔),가야관광호텔,고궁호텔,그린그래스호텔,남경,노블레스,녹스호텔,뉴오리엔탈호텔,뉴천지관광호텔,뉴힐탑관광호텔,더리버사이드호텔,디에스디엘,라뉘호텔,라미르호텔,라바호텔,라자호텔,레인보우호텔,렉스관광호텔,렉시호텔,로얄호텔서울로얄호텔점,리츠호텔,메이관광호텔,메이저호텔,바비엥스위트원,발리호텔,발리호텔,베네치아호텔,벨라지오호텔,삼호관광호텔,서울호텔,서호호텔,소피아관광호텔,스타호텔,시네마호텔,시네마호텔,신라호텔영빈관,썬비호텔,아르고호텔,아마레호텔,아이엠아이호텔,아카데미하우스호텔,엘르인호텔,엠비즈호텔,엠호텔,여관머니,영빈호텔사우나,올림픽파크텔,유양호텔,유원호텔,이사벨호텔,자이언트호텔,주영21,준희빈호텔,칼튼호텔,코리아관광호텔,코리아호텔,코보스호텔,테마호텔,테마호텔,토요코인,톰지모텔,톰지호텔,티이티이,티파니,프린세스호텔,플라워호텔,핀호텔,호텔G,호텔라까사,호텔마인드,호텔엘&에스,호텔케이피,호텔티파니,CF호텔,갤러리호텔,서울파트너스하우스,세림호텔,젤리호텔,JW메리어트호텔서울
+`;
+    var hotels = hotelName.split(',');
+    // 장소 검색 객체를 생성합니다
+    var ps = new daum.maps.services.Places();
+
+    var save = [];
+    // 키워드로 장소를 검색합니다
+    searchPlaces();
+
+    // 키워드 검색을 요청하는 함수입니다
+    function searchPlaces() {
+
+      for (let i = 0; i < hotels.length; i += 1) {
+        var element = hotels[i];
+        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+        ps.keywordSearch(element, placesSearchCB);
+      }
+
+    }
+
+    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+    function placesSearchCB(data, status, pagination) {
+      if (status === daum.maps.services.Status.OK) {
+        const place = data[0];
+        let temp = '';
+        temp += `${place.place_name},`;
+        if (place.road_address_name) {
+          temp += `${place.road_address_name},`;
+        } else {
+          temp += `${place.address_name},`;
+        }
+        if (place.phone) {
+          temp += `${place.phone},`;
+        } else {
+          temp += `02-1234-5678,`;
+        }
+        temp += `${place.x},`;
+        temp += `${place.y},`;
+        temp += `${place.category_name.split('>')[2]},`;
+        temp += `${place.category_name.split('>')[3]},`;
+        temp += `${place.place_url} |`;
+        $('#hotel').append(temp);
+        save.push(temp);
+      } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+
+        alert('검색 결과가 존재하지 않습니다.');
+        return;
+
+      } else if (status === daum.maps.services.Status.ERROR) {
+
+        alert('검색 결과 중 오류가 발생했습니다.');
+        return;
+
+      }
+    }
+  </script>
+</body>
+
+</html>

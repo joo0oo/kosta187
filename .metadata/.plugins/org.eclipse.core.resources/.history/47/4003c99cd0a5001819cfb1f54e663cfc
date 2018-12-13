@@ -1,0 +1,28 @@
+/**
+ * 
+ * 은행 계좌 관리 애플리케이션
+ * @author 송주현
+ *
+ */
+public class AMS {
+
+	public static void main(String[] args) {
+		//총 생성자 2개 만들기
+		//AccountManager manager = new AccountManager(); //디폴트 생성자
+		AccountManager manager = new AccountManager(100); // 사이즈 지정한 생성자 만들기
+		
+		Account account = new Account("1111-2222-3333", "김기정", 1233, 200000); 
+		//새로 생성된 account 객체를 manager 객체에 추가하기 
+		manager.add(account);
+		manager.add(new Account("2222-3333-4444", "박지성", 0000, 200000));
+		manager.add(new Account("3333-9999-6666", "손흥민", 3333, 100000));
+		manager.add(new Account("7777-7777-7777", "손흥민", 9999, 55000));
+		manager.add(new Account("8080-2020-8080", "손흥민", 6424, 800000));
+		
+		Account[] list = manager.list(); //전체 리스트를 리턴
+		for (Account account2 : list) {
+			System.out.println(account2.toString()); //전체 리스트 출력
+		}
+	}
+
+}

@@ -1,0 +1,58 @@
+/**
+ * 
+ * 배열에 관련한 공통 기능 정의
+ * @author 송주현
+ *
+ */
+
+public class ArrayUtil {
+
+	//alt+shift+j : 함수 선언부에서 커서 놓고 단축키 누르면 함수에 대한 주석 자동 생성 (아래)
+	/**
+	 * @param src			복사하고자 하는 원본 배열
+	 * @param increament	증가치
+	 * @return	복사된 배열 		
+	 */
+	public static int[] copy(int[] src, int increament) { //배열을 인자로 받아서 배열을 리턴하는 함수 (static이므로 클래스 전체에서 공유)
+		int[] array= new int[src.length+increament]; //array3보다 크기가 2 큰 배열 만들기
+		for(int i=0; i<src.length; i++) {
+			array[i]=src[i];
+		}
+		
+		return array;	
+	}
+	
+	/**
+	 * 배열 오름차순 정렬
+	 * @param src	정렬하고자 하는 원본 배열
+	 */
+	public static void sort(int[] src) { //call by reference
+		//alt+shift+r : 변수 이름 한꺼번에 바꾸기
+		int tmp;
+		for(int j=0; j<src.length-1; j++) {
+			for(int i=0; i<src.length-j-1; i++) {
+				if(src[i]>src[i+1]) {
+					tmp=src[i];
+					src[i]=src[i+1];
+					src[i+1]=tmp;
+				}
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		int[] array= {1,5,2,6,9,7};
+		int[] copy= ArrayUtil.copy(array, 4);
+		for (int i : copy) {
+			System.out.print(i+"\t");
+		}
+		
+		System.out.println();
+		
+		ArrayUtil.sort(array);
+		for (int i : copy) {
+			System.out.print(i+"\t");
+		}
+	}
+}

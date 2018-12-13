@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	/*
+	//var object = $("h3:even");// h3에서 짝수번째들만 가져옴 (원본 h3 전체배열은 없어짐)
+	//var object = $("h3").filter(":even");// h3 전체배열에서 짝수번째들만 복사해서 새 배열 만들기 (원본 살아있음)
+	
+	var object = $("h3").filter(":even");// 정적 필터링
+	object.css({
+		background: "black",
+		color: "white"
+	});
+	*/
+	
+	// 동적 필터링
+	$("h3").filter(function(index){
+		return (index % 3) == 0;		
+	}).css({
+		background: "black",
+		color: "white"
+	});
+});
+
+</script>
+</head>
+<body>
+<h3>Header-0</h3>
+<h3>Header-1</h3>
+<h3>Header-2</h3>
+<h3>Header-3</h3>
+<h3>Header-4</h3>
+<h3>Header-5</h3>
+</body>
+</html>

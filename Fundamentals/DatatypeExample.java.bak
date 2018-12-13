@@ -1,0 +1,37 @@
+/**
+ * 자바 데이터유형 테스트
+ *
+ */
+
+class DatatypeExample {
+	public static void main(String[] args)	{
+		boolean flag = true; //true는 키워드인 동시에 리터럴
+
+		//boolean flag2= 10; //java에서는 c처럼 숫자가 true가 아님, 오직 true/false만 가능, 즉 while(1)불가능
+		System.out.println(flag);
+
+		//char 예제
+		char x= '\uD55C'; // '한' 유니코드 직접할당
+		char y= '\uAE00'; // '글' 유니코드 직접할당
+		System.out.println(x);
+		System.out.println(y);
+
+		//제어문자
+		System.out.println("김\b기정 \n강사입니다");
+		System.out.println("\"자바\"가 좋아요");
+		System.out.println("C:\\a\\b\\c");
+
+		//byte, short, int, long
+		long money = 50000000; //메모리 낭비임 (4바이트 int->8바이트 long으로 자동 형변환작업을 거치기 때문에) 컴파일 에러는 아님
+		long money2 = 50000000L; //long형이라고 미리 알려주기때문에 자동 형변환작업을 거치지 않으므로 효율적
+
+
+		//java에서의 출력문
+		System.out.println(money2);
+		System.out.print(money2);
+		System.out.printf("%d",money2); //출력포맷을 설정해서 출력
+
+		// float, double
+		float pi= 3.141592; //에러
+	}
+}

@@ -1,0 +1,24 @@
+package kr.or.kosta.spring.demo.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/sample/*")
+@Log4j
+public class SampleController {
+
+	@RequestMapping(value="/all")
+	public void doAll(){
+		log.info("로그인 여부와 상관없이 누구든지 접근할 수 있습니다...");
+	}
+	
+	@RequestMapping(value="/member")
+	public void doMember(){
+		log.info("로그인 회원만 접근할 수 있습니다...");
+	}
+	
+	@RequestMapping(value="/admin")
+	public void doAdmin(){
+		log.info("로그인 관리자만 접근할 수 있습니다...");
+	}
+}

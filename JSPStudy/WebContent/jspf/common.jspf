@@ -1,0 +1,12 @@
+<%! //선언문 : 인스턴스 변수 -> 초기화 하려면 init()을 오버라이딩 해야한다 
+int count; 
+
+public void jspInit() {
+  //jsp에서는 httpServlet의 init()이 아니라 init을 한번더 상속받은 _jspInit()을 사용하므로 이것을 오버라이딩 
+  count= 0;
+}
+
+public void jspDestroy() {
+  count= 0;
+}
+%>

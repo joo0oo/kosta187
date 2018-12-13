@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.mywishlist">
+	
+	<!-- 위시리스트 등록 -->
+	<insert id="addWishlist" parameterType="Wishlist">
+		INSERT INTO wishlists 
+		            (wishlist_id, 
+		             hotel_id, 
+		             user_id) 
+		VALUES     (wishlist_id_seq.NEXTVAL, 
+		            #{hotel_id}, 
+		            #{user_id} 
+		            )
+	</insert>
+
+	
+		<!-- 위시리스트 존재 확인 -->
+	<select id="existWishCheck" parameterType="Wishlist" resultType="Wishlist">
+		SELECT wishlist_id "wishlist_id", 
+		       hotel_id "hotel_id", 
+		       user_id "user_id" 
+		FROM   wishlists
+		WHERE hotel_id = #{hotel_id} and user_id=#{user_id}
+	</select>
+	
+	<!-- 회원 아이디로 위시리스트 전체 리턴 -->
+	<select id="getMyWishlist" parameterType="String" resultType="int">
+		SELECT hotel_id "hotel_id"
+		FROM   wishlists
+		WHERE user_id=#{value}
+	</select>
+	
+	<!-- 위시리스트에서 삭제 -->
+	<delete id="deleteMyWishlist" parameterType="Wishlist" >
+		DELETE FROM wishlists 
+		WHERE  user_id = #{user_id} 
+		       AND hotel_id = #{hotel_id} 
+	</delete>
+	
+</mapper>

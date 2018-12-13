@@ -1,0 +1,10 @@
+package kr.or.kosta.school;
+
+public class Student {
+	String name;
+
+	public void info(){
+		System.out.pritnln("학생입니다..");
+	}
+
+}

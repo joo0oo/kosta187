@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;serverL&apos; in &apos;kr.or.kosta.chat.client.ChatFrame&apos; to &apos;nickNameL&apos;&#x0D;&#x0A;- Original project: &apos;NetworkStudy&apos;&#x0D;&#x0A;- Original element: &apos;kr.or.kosta.chat.client.ChatFrame.serverL&apos;&#x0D;&#x0A;- Renamed element: &apos;kr.or.kosta.chat.client.ChatFrame.nickNameL&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;serverL&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;kr.or.kosta.chat.client{ChatFrame.java[ChatFrame^serverL" name="nickNameL" references="true" setter="false" stamp="1536543733776" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+
+<script type="text/javascript" src='../js/Student.js'>
+
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+var student = new Student('김기정',92,86,98,77);
+console.log(student.name);
+console.log(student.korean);
+console.log(student['math']);
+
+console.log('총점 : '+student.getSum());
+console.log('평균 : '+student.getAverage());
+console.log(student.getSum);
+console.log(Student.schoolName);
+
+console.log(student.constructor);
+console.log(Student); //이 자체가 생성자이므로 위와 같은값 
+
+var student2= new student.constructor('aaa',10,20,30,40);
+console.log(student2); //이렇게도 가능하지만 잘 쓰지 않는다
+
+Student.toString(); //Function의 Prototype의 toString 호출
+console.log(Student.toString());
+
+student.toString(); //Object의 Prototype의 toString 호출
+console.log(student.toString());
+
+</script>
+
+</body>
+</html>

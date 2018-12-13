@@ -1,0 +1,48 @@
+/**
+ * 과제 : 배열로 stack 구현 (클래스로 구현)
+ * LIFO 구조의 스택구현
+ * @author 송주현
+ *
+ */
+
+public class ArrayStack {
+	
+	private int[] array;
+	
+	ArrayStack(int size){ //생성자
+		
+	}
+	
+	public void push(int value) {
+		
+	}
+	
+	public int pop() {
+		
+		return 0;
+	}
+	
+	public int length() { //스택의 사이즈 리턴
+		return 0;
+	}
+	
+	public static void main(String[] args) {
+		ArrayStack stack= new ArrayStack(100); //생성자 파라미터는 만들 스택의 사이즈
+		stack.push(5);
+		stack.push(15);
+		stack.push(55);
+		
+		//테스트를 위한 stack 출력
+		
+		
+		//pop출력
+		System.out.println(stack.pop());
+		System.out.println(stack.pop());
+		System.out.println(stack.pop());
+		
+		
+		//push-pop 연산 이후 스택의 length 출력 -> 0이 나와야 함
+		System.out.println(stack.pop());
+		
+	}
+}

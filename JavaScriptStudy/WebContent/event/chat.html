@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+<script type="text/javascript">
+window.onload = function(){
+	init();
+	eventRegist();
+}
+
+function init(){
+	//초기화 작업
+}
+
+function eventRegist(){
+	//이벤트 등록
+	var target= document.getElementById('inputTF');
+	document.getElementById('inputTF').onkeyup = function(e){
+		//console.log('d');
+		var event= e|| window.event; // 일반 브라우저|| IE 10이하
+		if( e.keyCode == 13) {//키보드의 엔터(13)가 눌렸을 때
+			appendText();
+		} 
+	}
+	
+	document.getElementById('sendB').onclick = function(){
+		appendText();	
+	}
+	
+}
+
+function appendText(text){
+	var messageTA= document.getElementById('messageTA');
+	var input = document.getElementById('inputTF');
+	var txt= input.value;
+	console.log(txt);
+	messageTA.value += txt+'\r\n';
+	input.value= '';
+	input.focus();
+}
+
+
+function getText(id){
+	var txt= document.getElementById(id).value;
+	console.log(txt);
+	return txt;
+}
+
+
+
+</script>
+</head>
+<body>
+
+<textarea rows="5" cols="50" id="messageTA" disabled="disabled"></textarea><br>
+<input type="text" size="40" maxlength="30" id="inputTF">
+<input type="button" value="전송" id="sendB">
+
+</body>
+</html>

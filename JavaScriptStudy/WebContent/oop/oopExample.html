@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+
+<script type="text/javascript">
+/* 사용자 정의 객체 (생성자) */
+
+function Student(name, korean, math, english,science){ 
+  this.name= name; //this를 쓰지 않으면 그냥 지역변수로 생성됐다가 사라짐 -> this를 써야 맵에 key& value로 저장됨
+  this.korean= korean;
+  this.math= math;
+  this.english= english;
+  this.science= science;
+  
+  this.getSum= function(){
+	  return this.korean+ this.math+ this.english+ this.science;
+  }
+  
+  this.getAverage= function(){
+	  return this.getSum() /4;
+  }
+  
+  this.toString = function(){
+	  return this.name+'\t'+this.korean+'\t'+this.math+'\t'+this.science+'\t';
+  }
+  
+}
+
+Student.schoolName='KOSTA 대학교'; //java의 static처럼 사용 ->Student의 맵 안에 저장됨
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+var student = new Student('김기정',92,86,98,77);
+console.log(student.name);
+console.log(student.korean);
+console.log(student['math']);
+
+console.log(typeof Student); //function 객체 (생성자 그자체)
+console.log(typeof student); //object 객체
+
+console.log(student); //브라우저마다 다른 결과 나옴
+console.log(student.toString()); //오버라이딩이 없어서 이렇게 써야 Student에서 재정의한 toString이 호출됨
+
+console.log('총점 : '+student.getSum());
+console.log('평균 : '+student.getAverage());
+console.log(student.getSum);
+console.log(Student.schoolName);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.myreview">
+	
+	<!-- 리뷰 새로 쓰기 -->
+	<insert id="writeReview" parameterType="Review">
+		INSERT INTO reviews 
+		            (review_id, 
+		             review_content, 
+		             review_date, 
+		             review_service_rate, 
+		             review_food_rate, 
+		             review_clean_rate, 
+		             review_location_rate, 
+		             review_price_rate, 
+		             hotel_id, 
+		             user_id,
+		             reservation_id) 
+		VALUES     (review_id_seq.NEXTVAL, 
+		            #{review_content}, 
+		            SYSDATE, 
+		            #{review_service_rate}, 
+		            #{review_food_rate}, 
+		            #{review_clean_rate}, 
+		            #{review_location_rate}, 
+		            #{review_price_rate}, 
+		            #{hotel_id}, 
+		            #{user_id},
+		            #{reservation_id})
+	</insert>
+	
+	<!-- 리뷰 아이디로 리뷰 조회 -->
+	<select id="searchReviewById" parameterType="int" resultType="Review">
+		SELECT review_id, 
+		       review_content, 
+		       review_date, 
+		       review_service_rate, 
+		       review_food_rate, 
+		       review_clean_rate, 
+		       review_location_rate, 
+		       review_price_rate, 
+		       review_helpful_count, 
+		       review_report_count, 
+		       hotel_id, 
+		       user_id, 
+		       reservation_id 
+		FROM   reviews 
+		WHERE  review_id = #{value} 
+	</select>
+	
+	<!-- 예약 번호로 리뷰 조회 -->
+	<select id="searchReviewByResId" parameterType="int" resultType="Review">
+		SELECT review_id, 
+		       review_content, 
+		       review_date, 
+		       review_service_rate, 
+		       review_food_rate, 
+		       review_clean_rate, 
+		       review_location_rate, 
+		       review_price_rate, 
+		       review_helpful_count, 
+		       review_report_count, 
+		       hotel_id, 
+		       user_id, 
+		       reservation_id 
+		FROM   reviews 
+		WHERE  reservation_id = #{value} 
+	</select>
+	
+	<!-- 예약 번호로 호텔 아이디 찾기 -->
+	<select id="searchHotelById" parameterType="int" resultType="int">
+		SELECT ro.hotel_id 
+		FROM   rooms ro 
+		       JOIN reservations res 
+		         ON res.room_id = ro.room_id 
+		WHERE  res.reservation_id = #{value}
+	</select>
+	
+	<!-- 예약번호로 사용자 아이디 찾기 -->
+	<select id="searchUserById" parameterType="int" resultType="String">
+		SELECT user_id 
+		FROM   reservations res 
+		WHERE  res.reservation_id = #{value}
+	</select>
+	
+	<!-- 리뷰 쓰고 나서 해당 예약 상태 업데이트 -->
+	<update id="setWritingStatus" parameterType="int">
+		UPDATE reservations 
+		SET    reservation_status = 300 
+		WHERE  reservation_id = #{value}
+	</update>
+	
+	<!-- 정지원 1113 추가 -->
+   <select id="getReviewsByHotelId" parameterType="string" resultType="ReviewJjw">
+SELECT review_id "reviewId",
+       Count(review_count_id)     "helpfulCount", 
+       rr.user_id           "userId", 
+       review_content       "content", 
+       to_char(review_date,'YYYY"년" MM"월" DD"일"')          "date", 
+       review_service_rate  "serviceRate", 
+       review_food_rate     "foodRate", 
+       review_clean_rate    "cleanRate", 
+       review_location_rate "locationRate", 
+       review_price_rate    "priceRate" 
+FROM   reviews rr 
+       left outer join review_counts USING(review_id) 
+WHERE  hotel_id = #{value}
+       AND review_id NOT IN (SELECT review_id 
+                         FROM   review_counts 
+                         WHERE  review_count_type = 'N' 
+                         GROUP  BY review_id 
+                         HAVING Count(review_count_id) <![CDATA[ > ]]> 10) 
+GROUP  BY review_id, rr.user_id, 
+          review_content, 
+          review_date, 
+          review_service_rate, 
+          review_food_rate, 
+          review_clean_rate, 
+          review_location_rate, 
+          review_price_rate
+ORDER BY Count(review_count_id) desc, (review_service_rate + review_food_rate + review_clean_rate + review_location_rate + review_price_rate) desc
+   </select>
+   
+   <select id="isReviewLiked" parameterType="map" resultType="string">
+SELECT review_id "reviewId"
+FROM   review_counts 
+WHERE  review_id in (${reviewId})
+       AND user_id = #{userId}
+       AND review_count_type = 'Y'
+group by review_id
+having Count(review_count_id) <![CDATA[ >= ]]> 1
+	</select>
+
+	<select id="isReviewHated" parameterType="map" resultType="string">
+SELECT review_id "reviewId"
+FROM   review_counts 
+WHERE  review_id in (${reviewId})
+       AND user_id = #{userId}
+       AND review_count_type = 'N'
+group by review_id
+having Count(review_count_id) <![CDATA[ >= ]]> 1
+	</select>
+
+	<insert id="likeReview" parameterType="map">
+		INSERT INTO review_counts 
+		VALUES     (review_count_id_seq.NEXTVAL, 
+            'Y', 
+            #{reviewId}, 
+            #{userId})	
+	</insert>
+
+	<insert id="hateReview" parameterType="map">
+			INSERT INTO review_counts 
+			VALUES     (review_count_id_seq.NEXTVAL, 
+            'N', 
+            #{reviewId}, 
+            #{userId})	
+	</insert>
+	
+	<delete id="deleteLikeReview" parameterType="map">
+		DELETE FROM review_counts 
+		WHERE  review_id = #{reviewId} 
+       AND user_id = #{userId}
+       AND review_count_type = 'Y' 
+	</delete>
+
+	<delete id="deleteHateReview" parameterType="map">
+		DELETE FROM review_counts 
+		WHERE  review_id = #{reviewId} 
+       AND user_id = #{userId}
+       AND review_count_type = 'N' 
+	</delete>
+	
+	<select id="getReviewCountById" parameterType="string" resultType="string">
+		SELECT Count(review_count_id) "count" 
+		FROM   review_counts 
+		WHERE  review_id = #{value} 
+       AND review_count_type = 'Y'	
+	</select>
+	
+</mapper>

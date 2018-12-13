@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.statis">
+	<select id="getHotelRoomAvg" resultType="HotelRoomAvg" >
+	SELECT 		ceil(avg(room_price)) room_avg
+	FROM 		rooms
+	</select>
+	
+	<select id="getHotelRateAvg" resultType="HotelRateAvg" >
+	SELECT 		avg(review_price_rate) price_avg,
+				avg(review_service_rate) service_avg,
+				avg(review_food_rate) food_avg, 
+				avg(review_clean_rate)  clean_avg,
+				avg(review_location_rate) location_avg
+	FROM		reviews
+	</select>
+	
+
+</mapper>

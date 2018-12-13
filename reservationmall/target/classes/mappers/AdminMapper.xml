@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<!-- 네임스페이스(사용영역) 설정 -->
+<mapper namespace="kr.or.kosta.reservationmall.admin">
+	<select id="getHotelList" resultType="Hotel" >
+		SELECT 	hotel_id,
+       		   	hotel_name,
+      		   	hotel_address,
+      		   	hotel_phonenum,
+       			hotel_rate,
+       			hotel_info,
+       			hotel_detail,
+       			hotel_website,
+       			hotel_x,
+       			hotel_y,
+       			location_id
+		FROM   hotels
+		ORDER BY hotel_id
+	</select>
+
+	<select id="getStatisticsInfo" resultType="StatisticsInfo" >
+		SELECT (select count(user_id)
+				 from users) "total_user",
+				(SELECT count(review_id)
+				 from reviews) "total_review", 
+				(select count(reservation_id)
+				 from reservations) "total_reservation" 
+		FROM 	dual
+	</select>
+	
+	<select id="getGraphMonthUse" resultType="map" >
+		select TO_CHAR(reservation_start_day,'mm') "reserve_month",
+				count(reservation_id) "reserve_count"
+		from reservations
+		group by TO_CHAR(reservation_start_day,'mm')
+	</select>
+	
+	<select id="getGraphPriceReserve" resultType="GraphPriceReserve" >
+				select (case when(total_price>=100000 and 200000>total_price) then '100000~200000'
+    			when (total_price>=200000 and 300000>total_price) then '200000~30000'
+   				when (total_price>=300000 and 400000>total_price) then '300000~40000' else '400000이상' end) "pay_divde",
+        		count(payment_id) "pay_count"
+        from 	payments
+        group by (case when(total_price>=100000 and 200000>total_price) then '100000~200000' when (total_price>=200000 and 300000>total_price) then '200000~30000' when (total_price>=300000 and 400000>total_price) then '300000~40000' else '400000이상' end)
+	</select>
+	
+	<select id="getGraphHotelUse" resultType="GraphHotelUse" >
+		SELECT 		loc.location_name hotel_name,
+					count(loc.location_id) hotel_count 
+		FROM 		reservations reserve inner join rooms room on reserve.room_id=room.room_id
+					inner join hotels on room.HOTEL_ID = hotels.HOTEL_ID
+					inner join locations loc on hotels.LOCATION_ID = loc.LOCATION_ID
+		GROUP BY	loc.location_name
+	</select>
+
+
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                          "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- MyBatis XML 설정 파일(MyBatis설정의 중앙 허브 역할) -->
+<configuration>
+	
+	<!-- Database properties 설정파일 경로 설정 -->
+	<properties resource="db-config.properties"/>
+	
+	<!--  MyBatis에서 사용할 자바클래스(패키지명 포함 풀네임)에 대한 짧은 별칭 등록 -->
+	<typeAliases>
+		<typeAlias type="kr.or.kosta.reservationmall.login.dto.User" alias="User"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.Hotel" alias="Hotel"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.Rooms" alias="Rooms"/>
+		<typeAlias type="kr.or.kosta.reservationmall.board.dto.Article" alias="Article"/>
+		<typeAlias type="kr.or.kosta.reservationmall.note.dto.Notes" alias="Notes"/>
+
+		<!-- 지원 추가 -->
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelSearchParam" alias="HotelSearchParam"/>
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelSearchResult" alias="HotelSearchResult"/>
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.Review" alias="ReviewJjw"/>
+		<typeAlias type="kr.or.kosta.reservationmall.room.dto.Room" alias="RoomJjw"/>
+		<!-- 지원 추가 -->
+		
+		<!-- 재혁 추가 -->
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.GraphMonthUse" alias="GraphMonthUse"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.GraphPriceReserve" alias="GraphPriceReserve"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.GraphHotelUse" alias="GraphHotelUse"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.GraphInfo" alias="GraphInfo"/>
+		<typeAlias type="kr.or.kosta.reservationmall.admin.dto.StatisticsInfo" alias="StatisticsInfo"/>
+		<typeAlias type="kr.or.kosta.reservationmall.individual.dto.Wishlist" alias="Wishlist"/>
+		<!-- 2018-11-12 추가 -->
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelRateAvg" alias="HotelRateAvg"/>
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelRoomAvg" alias="HotelRoomAvg"/>
+		<!-- 2018-11-13 추가 -->
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelPayment" alias="HotelPayment"/>
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelReserve" alias="HotelReserve"/>
+		<typeAlias type="kr.or.kosta.reservationmall.hotel.dto.HotelReserveCheck" alias="HotelReserveCheck"/>
+		<!-- 재혁 추가 -->
+		
+		
+		<!-- 주현 추가 -->
+		<typeAlias type="kr.or.kosta.reservationmall.individual.dto.ReservationInfo" alias="ReservationInfo"/>
+		<typeAlias type="kr.or.kosta.reservationmall.individual.dto.Review" alias="Review"/>
+		<typeAlias type="kr.or.kosta.reservationmall.individual.dto.Lastview" alias="LastviewSJH"/>
+		<!-- 주현 추가 -->
+	</typeAliases>
+	
+	<!-- 다수의 Database에 접근하거나 개발, 테스트, 운영 환경에 맞는 다중 환경 설정 지원 -->
+	<environments default="development">
+		
+		<!-- Database당 하나의 SqlSessionFactory 객체가 필요하며, Environment는 SqlSessionFactory 생성시 필요 -->
+		<environment id="development">
+			<!-- 트랜잭션 관리 방법 설정
+			  - JDBC : JDBC API의 commit(), rollback() 메소드를 이용하여 MyBatis 자체에서 트랜잭션 관리
+			  - MANAGED : WAS(WebLogic, WebSphere, JBoss 등)에서 지원하는 트랜잭션 관리 기능 이용			
+			 -->
+			<transactionManager type="JDBC" />
+			
+			<!-- MyBatis는 JDBC 표준 규약인 DataSource 구현체를 이용하여 DB 연결(Connection 생성) -->
+			<!-- MyBatis가 지원하는 DataSource 유형
+			  - UNPOOLED : DB 커넥션 요청할 때마다 DriverManager를 이용하여 Connection 객체 생성, 단순한 애플리케이션 개발 시 적합
+			  - POOLED   : ConnectionPool로 부터 Connection 취득, 엔터프라이즈 웹 애플리케이션 개발 시 적합
+			  - JNDI     : WAS에서 제공하는 DataSource 사용, 엔터프라이즈 웹 애플리케이션 개발 시 적합
+			 -->
+			<dataSource type="POOLED">
+				<!-- db-config.properties 설정 참조 -->
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<property name="poolMaximumActiveConnections" value="5"/> <!-- Default 10 -->
+				<property name="poolMaximumIdleConnections" value="2"/>   <!-- Default 5 -->
+				<property name="poolMaximumCheckoutTime" value="10000"/>  <!-- Default 20000 -->
+			</dataSource>
+		</environment>
+		
+	</environments>
+	
+	<!-- SQL XML Mapper 파일 경로 설정 -->
+	<mappers>
+		<!-- 클래스패스에 위치한 XML 매퍼 파일 지정 -->
+		<!-- 재혁 -->
+		<mapper resource="mappers/LoginMapper.xml"  />
+		<mapper resource="mappers/AdminMapper.xml"  />
+		<mapper resource="mappers/MyWishlistMapper.xml"  />
+		<mapper resource="mappers/StatisMapper.xml"  /><!-- 2018-11 12추가 -->
+		<mapper resource="mappers/ReserveMapper.xml"  /><!-- 2018-11 13추가 -->
+		
+				<!-- 혜림 -->
+		<mapper resource="mappers/ArticleMapper.xml"  />
+		<mapper resource="mappers/NoteMapper.xml"  />
+				
+		<!-- 주현 -->
+		<mapper resource="mappers/IndividualMapper.xml"  />
+		<mapper resource="mappers/MyReservationMapper.xml"  /> <!-- 1108추가 -->
+		<mapper resource="mappers/MyReviewMapper.xml"  /> <!-- 1109추가 -->
+		<mapper resource="mappers/MyLastviewMapper.xml"  /> <!-- 1113추가 -->
+		
+		<!-- 지원 -->
+		<mapper resource="mappers/HotelSearchMapper.xml"  />
+		
+		<!-- URL을 사용한 XML 매퍼 파일 지정 -->
+		<!-- <mapper url="file:///c:/someProject/mapper/SomeMapper.xml" />	 -->
+		
+		<!-- Mapper 인퍼페이스를 사용하는 인터페이스 위치 지정 -->
+		
+		
+		<!-- 패키지 지정으로 매퍼 자동 검색 -->
+
+		
+		<!-- XML 매퍼 파일 없이 Annotation 사용시 -->
+	
+	</mappers>
+
+</configuration>

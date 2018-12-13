@@ -1,0 +1,37 @@
+@charset "utf-8";
+div.accviewer {
+	width: 100%;
+	background-color: RebeccaPurple;
+}
+
+div.tablelabels {
+	color: white;
+}
+
+#accList {
+	float: left;
+}
+
+#won {
+	float: right;
+}
+
+#listAllTable {
+	clear: both;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th {
+	background-color: WhiteSmoke;
+	color: RebeccaPurple;
+}
+
+tr, td {
+	border: 1px solid Thistle;
+	color: thistle;
+}
+
+tr:hover{
+    background-color: #2F0B3A; 
+}

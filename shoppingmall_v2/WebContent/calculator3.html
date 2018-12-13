@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>미션) 계산기</title>
+<script type="text/javascript">
+
+window.onload= function(){
+	document.getElementById('result').onclick=function(){
+		sendServer();
+	}
+}
+
+function sendServer(){
+	var request = new XMLHttpRequest();
+	var num1= Number(document.getElementsByName('num1')[0].value);
+	var num2= Number(document.getElementsByName('num2')[0].value);
+
+	var target= document.getElementsByName('operator')[0];
+	var op= target.options[target.selectedIndex].text;
+	if(op == '+'){
+		op='plus';
+	}
+	
+	var param= '?num1='+num1+'&num2='+num2+'&op='+op;
+	var url= 'calculator3-server.jsp';
+	
+	request.open("get",url+param,true); //초기화
+	request.onreadystatechange= function(){
+		if(request.readyState == 4){
+			console.log('데이터 완전히 수신됨');
+			var result= request.responseText;
+			if(request.status == 200){
+				//정상 데이터 수신
+				document.getElementById('output').innerHTML= result;
+			}
+		} else{
+			console.log('서버로부터 데이터 수신중');
+		}
+	}
+	request.send();
+	
+}
+
+
+</script>
+</head>
+<body>
+  <input type="number" name="num1">
+  <select name="operator">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+  </select>
+  <input type="number" name="num2">
+  <span id="output"></span>
+  <input type="button" id="result" value="결과보기" >
+  
+</body>
+</html>
+

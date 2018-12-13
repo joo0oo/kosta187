@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> JavaScript</title>
+
+<style type="text/css"></style>
+<script src="js/common.js"></script>
+
+</head>
+<body>
+<h2> 오늘부터 자바스크립트 연습</h2>
+<p>
+JavaScript 활용
+동적 HTML 화면을 만들 수 있다.
+사용자의 이벤트를 처리할 수 있다.
+HTML이나 CSS의 내용을 변경할 수 있다.
+폼 입력 데이터에 대한 유효성 검증 작업을 할 수 있다.
+서버 프로그램(Servlet, JSP, PHP 등)과의 데이터 통신을 할 수 있다.
+JavaScript 장점
+다른 언어에 비해 간단하고 배우기 쉬움(?)
+컴파일 과정이 없으므로 신속한 개발이 가능(?)
+HTML과 같이 플랫폼에 독립적
+JavaScript 단점
+코드의 보안성 취약
+</p>
+
+-----------------------------------------------------<br>
+<!--  스크립트 선언 -->
+<script type="text/javascript"> 
+// 식별자, 키워드, 변수, 데이터타입, 연산자, 
+document.write("<h2>JavaScript와 Java는 </h2>");
+document.write("JavaScript와 Java는 이름이 유사하지만 <br>");
+document.write("JavaScript와 Java는 이름이 유사하지만 완전히 다른 프로그래밍 언어이다.");
+document.write(534021687432);
+document.write(true);
+document.write(false);
+
+</script>
+-----------------------------------------------------<br>
+
+
+<script type="text/javascript">
+// 변수 선언 : 기본 데이터타입 3가지 (nubmer, string, boolean)
+var name;
+document.write(name);
+
+name= '<h2>나는 "김기정" 입니다</h2>';
+document.write(name);
+
+var a=10, b=20, c=30;
+
+name= 'abcdefg';
+document.write(name);
+
+var flag= true;
+document.write(flag+"<br>");
+
+//레퍼런스 타입 
+var message= new String("나는 레퍼런스 타입 문자열 객체입니다");
+document.write(message.length());
+document.write(message);
+
+//변수 overWrite 기능
+var a=1000;
+document.write(a);
+
+//동적 타이핑
+name=5000; //name은 지금 String이지만 Number 할당 가능 (타입 변경)
+</script>
+-----------------------------------------------------<br>
+
+
+<script type="text/javascript">
+//함수 선언
+function sum(x,y){
+	return x+y;
+}
+
+var x=50, y=40;
+var result=sum(x,y);
+document.write(result);
+</script>
+
+</body>
+</html>

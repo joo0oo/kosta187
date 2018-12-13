@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;UserListController.java&apos; to &apos;reservationmall/src/main/java/kr.or.kosta.reservationmall.individual.controller&apos;&#x0D;&#x0A;- Original project: &apos;Model2Study_v3&apos;&#x0D;&#x0A;- Destination element: &apos;reservationmall/src/main/java/kr.or.kosta.reservationmall.individual.controller&apos;&#x0D;&#x0A;- Original element: &apos;kr.or.kosta.shoppingmall.user.controller.UserListController.java&apos;" description="Copy compilation unit" destination="=reservationmall/src\/main\/java&lt;kr.or.kosta.reservationmall.individual.controller" element1="/src&lt;kr.or.kosta.shoppingmall.user.controller{UserListController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1541667462474" units="1" version="1.0"/>
+</session>

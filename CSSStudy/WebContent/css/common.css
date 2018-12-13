@@ -1,0 +1,11 @@
+/* @charset "utf-8"; */
+
+body{
+  font-family: 굴림
+}
+
+p {
+  font-size: 20pt; 
+  color: tomato; 
+  background-color: gold; 
+}

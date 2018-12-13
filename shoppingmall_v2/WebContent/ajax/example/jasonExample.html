@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+</head>
+<body>
+
+<script type="text/javascript">
+//var object= {}; //new Object(); 와 같은 표기
+
+var object= {
+	name : '김기정',
+	age : 22,
+	flag : true
+};
+
+console.log(object.name);
+console.log(object['age']);
+console.log(object.flag);
+
+//var array= new Array();
+var array= ['김기정', '박찬호', object, Math, new Date()];
+for ( var i in array) {
+	console.log(array[i].constructor); //객체 비교
+}	
+
+var text= '{"name" : "김기정",	"age" : 22,	"flag" : true}';
+console.log(text);
+console.log(typeof text);
+
+var text2= JSON.stringify(object);
+console.log(text2);
+console.log(typeof text2);
+
+var text3= JSON.stringify(array);
+console.log(text3);
+console.log(typeof text3);
+
+
+var person= JSON.parse(text2);
+console.log(person.name);
+console.log(person.age);
+console.log(person.flag);
+
+var arr2= JSON.parse(text3);
+console.log(arr2);
+</script>
+
+</body>
+</html>

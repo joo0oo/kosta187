@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\KOSTA187\workspace\reservationmall-181112-ver1.2"/>
+		<item value="C:\KOSTA187\workspace\reservationmall"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall-181110-ver1.1"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall_20181110_V0.1"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall_20181108_v0.1"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall_common_20181107_v0.1"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall11051829"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall_1105_1829"/>
+		<item value="C:\Users\KOSTA\Desktop\5조 호텔예약 사이트\reservationmall"/>
+		<item value="C:\KOSTA187\강의자료실\24.Model2 기반 웹애플리케이션 구축\배포소스2"/>
+		<item value="C:\Users\KOSTA\Desktop\Project_BS_Client2"/>
+		<item value="C:\Users\KOSTA\Documents\카카오톡 받은 파일\Project_BS_Client2"/>
+		<item value="C:\KOSTA187\강의자료실\demo-20180904T083838Z-001\demo"/>
+	</list>
+	<section name="CleanDialogSettings">
+		<item value="581" key="DIALOG_WIDTH"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="452" key="DIALOG_HEIGHT"/>
+		<item value="670" key="DIALOG_X_ORIGIN"/>
+		<item value="214" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.jst.servlet.ui.project.facet.WebProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.wst.web.ui"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
+		<item value="false" key="FilterByLocation"/>
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode/&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;" key="WorkingSet"/>
+		<item value="false" key="ShowDerived"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="669" key="DIALOG_X_ORIGIN"/>
+			<item value="191" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="613" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="645" key="DIALOG_HEIGHT"/>
+		<item value="653" key="DIALOG_X_ORIGIN"/>
+		<item value="94" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

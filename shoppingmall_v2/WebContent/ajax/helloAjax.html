@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+<script type="text/javascript">
+window.onload= function(){
+	document.getElementById('send').onclick=function(){
+		var message= document.getElementById('message').value;
+		message=encodeURIComponent(message);
+		sendServer(message);
+		
+	}
+}
+
+function sendServer(message){
+	var request= new XMLHttpRequest();
+	/*
+	for ( var name in request) {
+		console.log(name + " : " + request[name]);
+	}	
+	*/
+	var url='server.jsp?message='+message;
+	request.open("get",url,true); //초기화
+	request.onreadystatechange= function(){
+		//request 상태가 바뀔때마다 (이벤트 발생시) 이 함수 호출됨
+		console.log("[from server]"+request.responseText);
+		//server.jsp에서 out.println() 한 메세지가 리턴됨
+		if(request.readyState == 4){ 
+			//4 : 서버로부터 메세지 완전히 수신된 경우
+			
+			if(request.status == 200){
+				//200 : 정상 데이터 수신
+				appendMessage(request.responseText);
+			} else if(request.status == 400){
+				//400 : 잘못된 요청
+				alert('잘못된 요청입니다');
+			} else if (request.status == 500){
+				//500 : 서버 장애
+				alert('서버 장애입니다');
+				
+			}
+			
+		} else{
+			console.log('서버로부터 데이터 수신중');
+		}
+		
+	}
+	request.send(); //보내기
+}
+
+function appendMessage(message){
+	var output= document.getElementById('output');
+	output.innerHTML=message;
+}
+
+</script>
+</head>
+<body>
+
+ <!--  
+<form action="server.jsp">
+  <input type="text" name="message" id="message" size="20">
+  <input type="submit" value="전송" id="send">
+</form>
+   -->
+
+<input type="text" name="message" id="message" size="20" value="default message">
+<input type="button" value="전송" id="send">
+<span id="output"></span>
+
+</body>
+</html>
